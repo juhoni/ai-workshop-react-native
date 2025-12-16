@@ -442,7 +442,92 @@
       </div>
     </div>
 
-    <!-- Slide 7: Section - Where AI Excels -->
+    <!-- Slide 7: How to Use AI in IDEs -->
+    <div class="slide">
+      <h1>How to Use AI in IDEs</h1>
+      <div class="row">
+        <div class="col" style="flex: 1">
+          <div class="card" style="border-left: 4px solid #3b82f6;">
+            <p class="card-title text-blue">Plan Mode</p>
+            <p class="card-desc" style="margin-bottom: 12px;">Ask AI to plan steps without executing</p>
+            <p style="font-size: 14px; color: #94a3b8;"><strong>When:</strong> Complex features, architecture decisions, unclear requirements</p>
+          </div>
+          <div class="card" style="border-left: 4px solid #10b981;">
+            <p class="card-title text-green">Ask Mode</p>
+            <p class="card-desc" style="margin-bottom: 12px;">Questions without code changes</p>
+            <p style="font-size: 14px; color: #94a3b8;"><strong>When:</strong> Understanding code, exploring APIs, debugging</p>
+          </div>
+          <div class="card" style="border-left: 4px solid #8b5cf6;">
+            <p class="card-title text-purple">Agent Mode</p>
+            <p class="card-desc" style="margin-bottom: 12px;">AI makes changes autonomously</p>
+            <p style="font-size: 14px; color: #94a3b8;"><strong>When:</strong> Repetitive edits, boilerplate, clear requirements</p>
+          </div>
+        </div>
+        <div class="col" style="flex: 1">
+          <div class="card" style="border-left: 4px solid #f59e0b;">
+            <p class="card-title text-amber">Review Changes</p>
+            <p class="card-desc">Always check diffs before accepting</p>
+            <ul style="font-size: 14px; margin-top: 8px;">
+              <li>Verify logic is correct</li>
+              <li>Check for security issues</li>
+              <li>Test TypeScript types</li>
+            </ul>
+          </div>
+          <div class="card" style="border-left: 4px solid #ef4444;">
+            <p class="card-title text-red">Undo Changes</p>
+            <p class="card-desc">Git is your safety net</p>
+            <p style="font-size: 14px; margin-top: 8px; color: #94a3b8;">Use git reset, revert, or IDE undo. Never accept changes blindly.</p>
+          </div>
+          <div class="card" style="border-left: 4px solid #06b6d4;">
+            <p class="card-title text-cyan">Changing Models</p>
+            <p class="card-desc">Different tasks need different models</p>
+            <p style="font-size: 14px; margin-top: 8px; color: #94a3b8;"><strong>Fast models:</strong> Quick edits. <strong>Smart models:</strong> Complex reasoning.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 8: Providing Context to AI -->
+    <div class="slide">
+      <h1>Providing Context to AI</h1>
+      <div class="row">
+        <div class="col" style="flex: 1">
+          <div class="card" style="border-left: 4px solid #3b82f6;">
+            <p class="card-title text-blue">Tag Files</p>
+            <p class="card-desc" style="margin-bottom: 12px;">Use @filename or #file:path to reference files</p>
+            <p style="font-size: 14px; color: #94a3b8;"><strong>Best for:</strong> Related components, configs, type definitions</p>
+          </div>
+          <div class="card" style="border-left: 4px solid #10b981;">
+            <p class="card-title text-green">Select Code</p>
+            <p class="card-desc" style="margin-bottom: 12px;">Highlight code in editor before asking</p>
+            <p style="font-size: 14px; color: #94a3b8;"><strong>Best for:</strong> Specific functions, bugs, refactoring a section</p>
+          </div>
+          <div class="card" style="border-left: 4px solid #8b5cf6;">
+            <p class="card-title text-purple">Provide Project Docs</p>
+            <p class="card-desc" style="margin-bottom: 12px;">Share READMEs, guidelines, architecture docs</p>
+            <p style="font-size: 14px; color: #94a3b8;">Up-to-date docs give AI guardrails for code style, patterns, and feature requirements</p>
+          </div>
+        </div>
+        <div class="col" style="flex: 1">
+          <div class="card" style="border-left: 4px solid #ef4444;">
+            <p class="card-title text-red">Add Error Messages</p>
+            <p class="card-desc" style="margin-bottom: 12px;">Full stack traces, not just titles</p>
+            <p style="font-size: 14px; color: #94a3b8;">Include platform (iOS/Android) and device info</p>
+          </div>
+          <div class="card" style="border-left: 4px solid #f59e0b;">
+            <p class="card-title text-amber">Provide URLs</p>
+            <p class="card-desc" style="margin-bottom: 12px;">Link to docs for AI to browse</p>
+            <p style="font-size: 14px; color: #94a3b8;">AI training data is frozen — help it access current info</p>
+          </div>
+          <div class="warning-box">
+            <p class="warning-title">DON'T OVERLOAD</p>
+            <p style="font-size: 14px;">Provide only relevant context. Too much fills the working context window and wastes tokens.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 9: Section - Where AI Excels -->
     <div class="slide section">
       <div class="section-bar bg-green"></div>
       <div class="section-content">
@@ -1141,7 +1226,7 @@
             "
           >
             <p style="font-size: 18px; font-weight: bold">
-              Best: types, debug, boilerplate
+              Best: types, debug, boilerplate, tests, review, docs
             </p>
           </div>
           <div
@@ -1253,8 +1338,7 @@
     </div>
 
     <div class="slide-counter">
-      <span id="currentSlide">1</span> / <span id="totalSlides">30</span>
-    </div>
+  <span id="currentSlide">1</span> / <span id="totalSlides">32</span>
 
     <script>
       let currentSlide = 0;
