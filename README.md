@@ -55,6 +55,24 @@ Build a pull-to-refresh indicator:
 - Rotate while refreshing
 - Use Reanimated v4 syntax (not v2!)
 
+### Exercise 4: Data Fetching with TanStack Query
+**File:** `app/exercises/exercise4.tsx`
+
+Implement user profile with React Query v5:
+- Fetch data with automatic caching
+- Optimistic updates for editing
+- Handle loading and error states
+- Avoid mixing v3/v4/v5 syntax
+
+### Exercise 5: Performance Optimization
+**File:** `app/exercises/exercise5.tsx`
+
+Review a product list for performance:
+- Identify real bottlenecks vs premature optimization
+- When to use `useMemo`/`useCallback`
+- Correct dependency arrays
+- Question AI recommendations critically
+
 ## Workshop Tips
 
 ### Good Prompts Include:
@@ -82,7 +100,9 @@ app/
     ├── _layout.tsx      # Exercises stack navigator
     ├── exercise1.tsx    # Material Top Tabs debug
     ├── exercise2.tsx    # Type-safe component
-    └── exercise3.tsx    # Reanimated animation
+    ├── exercise3.tsx    # Reanimated animation
+    ├── exercise4.tsx    # TanStack Query data fetching
+    └── exercise5.tsx    # Performance optimization
 ```
 
 ## Resources
