@@ -1,0 +1,27 @@
+{
+  "expo": {
+    "name": "AI Workshop Exercises",
+    "slug": "ai-workshop-exercises",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "workshop",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.workshop.aiexercises"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#0f172a"
+      },
+      "package": "com.workshop.aiexercises"
+    },
+    "plugins": [
+      "expo-router"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}
