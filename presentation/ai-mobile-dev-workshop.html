@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI-Powered Mobile Development Workshop</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: #f1f5f9;
+      overflow: hidden;
+    }
+    
+    .slide {
+      width: 100vw;
+      height: 100vh;
+      padding: 48px 64px;
+      display: none;
+      flex-direction: column;
+    }
+    
+    .slide.active {
+      display: flex;
+    }
+    
+    .slide.center {
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .slide.section {
+      flex-direction: row;
+      padding: 0;
+    }
+    
+    .section-bar {
+      width: 35%;
+      height: 100%;
+    }
+    
+    .section-content {
+      width: 65%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 64px;
+    }
+    
+    h1 {
+      font-size: 42px;
+      font-weight: bold;
+      margin-bottom: 24px;
+    }
+    
+    h2 {
+      font-size: 32px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    
+    .subtitle {
+      font-size: 24px;
+      color: #94a3b8;
+    }
+    
+    .label {
+      font-size: 14px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    
+    .row {
+      display: flex;
+      gap: 24px;
+      flex: 1;
+    }
+    
+    .col {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    
+    .card {
+      background: #1e293b;
+      border-radius: 12px;
+      padding: 24px;
+    }
+    
+    .card-title {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+    
+    .card-desc {
+      font-size: 16px;
+      color: #e2e8f0;
+    }
+    
+    .card-meta {
+      font-size: 14px;
+      margin-top: 12px;
+    }
+    
+    .code-block {
+      background: #1e293b;
+      border-radius: 8px;
+      padding: 20px;
+      font-family: 'Courier New', monospace;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+    
+    .code-comment {
+      color: #94a3b8;
+    }
+    
+    .warning-box {
+      background: rgba(239, 68, 68, 0.15);
+      border-left: 4px solid #ef4444;
+      padding: 16px;
+      border-radius: 0 8px 8px 0;
+    }
+    
+    .warning-title {
+      color: #ef4444;
+      font-weight: bold;
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+    
+    .tip-box {
+      background: rgba(16, 185, 129, 0.15);
+      border-left: 4px solid #10b981;
+      padding: 16px;
+      border-radius: 0 8px 8px 0;
+    }
+    
+    .tip-title {
+      color: #10b981;
+      font-weight: bold;
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+    
+    ul {
+      padding-left: 24px;
+      font-size: 18px;
+      line-height: 1.8;
+    }
+    
+    .takeaway {
+      border-left: 4px solid;
+      padding: 16px 20px;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 12px;
+    }
+    
+    /* Navigation */
+    .nav {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      display: flex;
+      gap: 12px;
+      z-index: 100;
+    }
+    
+    .nav button {
+      background: #3b82f6;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    
+    .nav button:hover {
+      background: #2563eb;
+    }
+    
+    .nav button:disabled {
+      background: #475569;
+      cursor: not-allowed;
+    }
+    
+    .slide-counter {
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      font-size: 14px;
+      color: #64748b;
+    }
+    
+    /* Colors */
+    .text-blue { color: #3b82f6; }
+    .text-green { color: #10b981; }
+    .text-purple { color: #8b5cf6; }
+    .text-orange { color: #f97316; }
+    .text-amber { color: #f59e0b; }
+    .text-red { color: #ef4444; }
+    .text-cyan { color: #06b6d4; }
+    .text-pink { color: #ec4899; }
+    .text-gray { color: #94a3b8; }
+    
+    .bg-blue { background: linear-gradient(180deg, #3b82f6 0%, #1d4ed8 100%); }
+    .bg-green { background: linear-gradient(180deg, #10b981 0%, #059669 100%); }
+    .bg-red { background: linear-gradient(180deg, #ef4444 0%, #b91c1c 100%); }
+    .bg-purple { background: linear-gradient(180deg, #8b5cf6 0%, #6d28d9 100%); }
+    .bg-amber { background: linear-gradient(180deg, #f59e0b 0%, #d97706 100%); }
+    
+    .border-blue { border-color: #3b82f6; }
+    .border-green { border-color: #10b981; }
+    .border-purple { border-color: #8b5cf6; }
+    .border-orange { border-color: #f97316; }
+    .border-amber { border-color: #f59e0b; }
+    .border-red { border-color: #ef4444; }
+    .border-cyan { border-color: #06b6d4; }
+    .border-pink { border-color: #ec4899; }
+  </style>
+</head>
+<body>
+
+<!-- Slide 1: Title -->
+<div class="slide center active" style="background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #0f172a 100%);">
+  <p class="label text-blue" style="font-size: 18px; letter-spacing: 4px;">Workshop</p>
+  <h1 style="font-size: 56px; text-align: center; margin: 20px 0;">AI-Powered Mobile Dev</h1>
+  <p class="subtitle" style="font-size: 28px;">Practical Strategies for React Native Teams</p>
+  <p style="color: #64748b; margin-top: 48px; font-size: 18px;">2 Hours: Presentation + Hands-on</p>
+</div>
+
+<!-- Slide 2: Agenda -->
+<div class="slide">
+  <h1>Today's Agenda</h1>
+  <div class="row">
+    <div class="col" style="flex: 1;">
+      <div class="card" style="border-left: 4px solid #3b82f6;">
+        <p style="font-size: 22px; font-weight: bold;">1. Available AI Tools</p>
+      </div>
+      <div class="card" style="border-left: 4px solid #3b82f6;">
+        <p style="font-size: 22px; font-weight: bold;">2. Where AI Excels</p>
+      </div>
+      <div class="card" style="border-left: 4px solid #3b82f6;">
+        <p style="font-size: 22px; font-weight: bold;">3. The Pitfalls</p>
+      </div>
+    </div>
+    <div class="col" style="flex: 1;">
+      <div class="card" style="border-left: 4px solid #10b981;">
+        <p style="font-size: 22px; font-weight: bold;">4. Effective Prompting</p>
+      </div>
+      <div class="card" style="border-left: 4px solid #10b981;">
+        <p style="font-size: 22px; font-weight: bold;">5. Hands-on Exercises</p>
+      </div>
+      <div class="card" style="border-left: 4px solid #10b981;">
+        <p style="font-size: 22px; font-weight: bold;">6. Discussion</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 3: Section - AI Tools -->
+<div class="slide section">
+  <div class="section-bar bg-blue"></div>
+  <div class="section-content">
+    <p class="label text-blue">Part 1</p>
+    <h1 style="font-size: 48px;">Available AI Tools</h1>
+    <p class="subtitle">Free options you can use today</p>
+  </div>
+</div>
+
+<!-- Slide 4: Chat-Based AI Tools -->
+<div class="slide">
+  <h1>Chat-Based AI Tools</h1>
+  <div class="row">
+    <div class="col" style="flex: 1;">
+      <div class="card">
+        <p class="card-title text-blue">Claude.ai</p>
+        <p class="card-desc">Complex reasoning, long context, code review</p>
+        <p class="card-meta text-amber">Free: ~30 msgs/day</p>
+      </div>
+    </div>
+    <div class="col" style="flex: 1;">
+      <div class="card">
+        <p class="card-title text-green">ChatGPT</p>
+        <p class="card-desc">Quick answers, web browsing, image gen</p>
+        <p class="card-meta text-amber">Free: GPT-4o mini</p>
+      </div>
+    </div>
+    <div class="col" style="flex: 1;">
+      <div class="card">
+        <p class="card-title text-orange">Ollama</p>
+        <p class="card-desc">100% local and private, runs on your machine</p>
+        <p class="card-meta text-green">Completely free</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 5: AI-Powered IDEs -->
+<div class="slide">
+  <h1>AI-Powered IDEs</h1>
+  <div class="row">
+    <div class="col" style="flex: 1;">
+      <div class="card">
+        <p class="card-title text-purple">Cursor</p>
+        <p class="card-desc">AI-native IDE, codebase aware, VS Code fork</p>
+        <p class="card-meta text-amber">Free: 2000 completions/mo</p>
+      </div>
+    </div>
+    <div class="col" style="flex: 1;">
+      <div class="card">
+        <p class="card-title text-blue">Antigravity</p>
+        <p class="card-desc">Google's agent-first IDE, multi-agent, browser control</p>
+        <p class="card-meta text-green">Free: Generous limits</p>
+      </div>
+    </div>
+    <div class="col" style="flex: 1;">
+      <div class="card">
+        <p class="card-title text-cyan">Windsurf</p>
+        <p class="card-desc">Fast AI code completion, 70+ languages</p>
+        <p class="card-meta text-green">Free: No usage limits</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 6: Terminal CLI Tools -->
+<div class="slide">
+  <h1>Terminal / CLI Tools</h1>
+  <div class="row">
+    <div class="col" style="flex: 1;">
+      <div class="card">
+        <p class="card-title text-amber">Claude Code</p>
+        <p class="card-desc">Anthropic's agentic CLI, file editing, Git integration</p>
+        <p class="card-meta text-amber">Requires Pro plan</p>
+      </div>
+    </div>
+    <div class="col" style="flex: 1;">
+      <div class="card">
+        <p class="card-title text-blue">Gemini CLI</p>
+        <p class="card-desc">Google's open-source CLI, MCP support, extensible</p>
+        <p class="card-meta text-green">Free: 1000 req/day</p>
+      </div>
+    </div>
+    <div class="col" style="flex: 1;">
+      <div class="card">
+        <p class="card-title text-green">OpenCode</p>
+        <p class="card-desc">Open-source Claude Code alt, 75+ providers, LSP support</p>
+        <p class="card-meta text-green">100% free</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 7: Section - Where AI Excels -->
+<div class="slide section">
+  <div class="section-bar bg-green"></div>
+  <div class="section-content">
+    <p class="label text-green">Part 2</p>
+    <h1 style="font-size: 48px;">Where AI Excels</h1>
+    <p class="subtitle">High-value use cases for React Native</p>
+  </div>
+</div>
+
+<!-- Slide 8: TypeScript -->
+<div class="slide">
+  <p class="label text-green">Use Case #1</p>
+  <h2>TypeScript Type Gymnastics</h2>
+  <div class="row">
+    <div class="col" style="flex: 0.4;">
+      <p style="font-size: 20px; font-weight: bold; margin-bottom: 16px;">AI excels at:</p>
+      <ul>
+        <li>Complex generics</li>
+        <li>Discriminated unions</li>
+        <li>Conditional types</li>
+      </ul>
+    </div>
+    <div class="code-block" style="flex: 0.6;">
+      <p class="code-comment">// Mutually exclusive props</p>
+      <p>type WithData = {</p>
+      <p style="padding-left: 20px;">data: T[]; children?: never;</p>
+      <p>};</p>
+      <p style="margin-top: 12px;">type WithChildren = {</p>
+      <p style="padding-left: 20px;">data?: never; children: ReactNode;</p>
+      <p>};</p>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 9: Expo Router -->
+<div class="slide">
+  <p class="label text-green">Use Case #2</p>
+  <h2>Expo Router Navigation</h2>
+  <div class="row">
+    <div class="col" style="flex: 0.4;">
+      <p style="font-size: 20px; font-weight: bold; margin-bottom: 16px;">AI can help with:</p>
+      <ul>
+        <li>File-based routing</li>
+        <li>Typed routes</li>
+        <li>Dynamic segments [id]</li>
+      </ul>
+      <div class="warning-box" style="margin-top: 16px;">
+        <p class="warning-title">CAUTION</p>
+        <p style="font-size: 15px;">expo-router is newer — more AI hallucinations!</p>
+      </div>
+    </div>
+    <div class="code-block" style="flex: 0.6;">
+      <p class="code-comment">// app/user/[id].tsx</p>
+      <p>const { id } = useLocalSearchParams</p>
+      <p style="padding-left: 20px;">&lt;{ id: string }&gt;();</p>
+      <p style="margin-top: 16px;" class="code-comment">// myapp://user/123 works automatically!</p>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 10: Tanstack Query -->
+<div class="slide">
+  <p class="label text-green">Use Case #3</p>
+  <h2>Tanstack Query Patterns</h2>
+  <div class="row">
+    <div class="col" style="flex: 0.35;">
+      <p style="font-size: 20px; font-weight: bold; margin-bottom: 16px;">Ask AI about:</p>
+      <ul>
+        <li>Cache invalidation</li>
+        <li>Optimistic updates</li>
+        <li>Infinite scroll</li>
+      </ul>
+    </div>
+    <div class="code-block" style="flex: 0.65;">
+      <p class="code-comment">// Optimistic update</p>
+      <p>useMutation({</p>
+      <p style="padding-left: 16px;">onMutate: async (newItem) =&gt; {</p>
+      <p style="padding-left: 32px;">await queryClient.cancelQueries();</p>
+      <p style="padding-left: 32px;">const prev = queryClient.getQueryData();</p>
+      <p style="padding-left: 32px;">// Update cache optimistically</p>
+      <p style="padding-left: 32px;">return { prev };</p>
+      <p style="padding-left: 16px;">},</p>
+      <p style="padding-left: 16px;">onError: (e, v, ctx) =&gt; /* rollback */</p>
+      <p>});</p>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 11: Reanimated -->
+<div class="slide">
+  <p class="label text-green">Use Case #4</p>
+  <h2>Reanimated Animations</h2>
+  <div class="row">
+    <div class="col" style="flex: 0.35;">
+      <p style="font-size: 20px; font-weight: bold; margin-bottom: 16px;">AI helps with:</p>
+      <ul>
+        <li>Shared values</li>
+        <li>Gesture integration</li>
+        <li>Worklet syntax</li>
+      </ul>
+      <div class="warning-box" style="margin-top: 16px;">
+        <p class="warning-title">CAUTION</p>
+        <p style="font-size: 15px;">AI mixes v2/v3/v4 syntax!</p>
+      </div>
+    </div>
+    <div class="code-block" style="flex: 0.65;">
+      <p class="code-comment">// Reanimated v4</p>
+      <p>const x = useSharedValue(0);</p>
+      <p style="margin-top: 12px;">const gesture = Gesture.Pan()</p>
+      <p style="padding-left: 16px;">.onUpdate(e =&gt; x.value = e.translationX)</p>
+      <p style="padding-left: 16px;">.onEnd(() =&gt; x.value = withSpring(0));</p>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 12: More Use Cases -->
+<div class="slide">
+  <h1>More High-Value Use Cases</h1>
+  <div class="row">
+    <div class="col" style="flex: 1;">
+      <div class="card" style="border-top: 4px solid #3b82f6;">
+        <p class="card-title text-blue">Debugging</p>
+        <p class="card-desc">Platform crashes, Android quirks</p>
+      </div>
+      <div class="card" style="border-top: 4px solid #8b5cf6;">
+        <p class="card-title text-purple">Test Generation</p>
+        <p class="card-desc">Jest, MSW handlers</p>
+      </div>
+    </div>
+    <div class="col" style="flex: 1;">
+      <div class="card" style="border-top: 4px solid #10b981;">
+        <p class="card-title text-green">Boilerplate</p>
+        <p class="card-desc">Forms, API hooks, screens</p>
+      </div>
+      <div class="card" style="border-top: 4px solid #f59e0b;">
+        <p class="card-title text-amber">Regex</p>
+        <p class="card-desc">Validation, data transforms</p>
+      </div>
+    </div>
+    <div class="col" style="flex: 1;">
+      <div class="card" style="border-top: 4px solid #ec4899;">
+        <p class="card-title text-pink">Code Review</p>
+        <p class="card-desc">Spot issues, suggestions</p>
+      </div>
+      <div class="card" style="border-top: 4px solid #06b6d4;">
+        <p class="card-title text-cyan">Documentation</p>
+        <p class="card-desc">JSDoc, README files</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 13: Section - Pitfalls -->
+<div class="slide section">
+  <div class="section-bar bg-red"></div>
+  <div class="section-content">
+    <p class="label text-red">Part 3</p>
+    <h1 style="font-size: 48px;">The Pitfalls</h1>
+    <p class="subtitle">Critical warnings and anti-patterns</p>
+  </div>
+</div>
+
+<!-- Slide 14: Hallucinated APIs -->
+<div class="slide">
+  <p class="label text-red">Pitfall #1</p>
+  <h2>Hallucinated APIs</h2>
+  <div class="row">
+    <div class="col" style="flex: 1;">
+      <p style="font-size: 18px; margin-bottom: 20px;">AI confidently suggests props and methods that simply do not exist.</p>
+      <div class="card" style="background: rgba(239, 68, 68, 0.2);">
+        <p class="text-red" style="font-weight: bold; margin-bottom: 8px;">EXAMPLE</p>
+        <p style="font-family: monospace; font-size: 18px;">preloadDistance={500}</p>
+        <p class="text-amber" style="margin-top: 8px;">This prop does not exist!</p>
+      </div>
+    </div>
+    <div class="col" style="flex: 1;">
+      <div class="tip-box">
+        <p class="tip-title">ALWAYS VERIFY:</p>
+        <ul style="font-size: 16px;">
+          <li>Check official docs</li>
+          <li>Use TypeScript autocomplete</li>
+          <li>Test on both platforms</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 15: Outdated Patterns -->
+<div class="slide">
+  <p class="label text-red">Pitfall #2</p>
+  <h2>Outdated Patterns</h2>
+  <div class="row">
+    <div class="col" style="flex: 1;">
+      <p class="text-red" style="font-size: 20px; font-weight: bold; margin-bottom: 16px;">AI Often Suggests:</p>
+      <div class="card" style="background: rgba(239, 68, 68, 0.1); margin-bottom: 12px;">
+        <p class="code-comment">// Class components</p>
+        <p style="font-family: monospace;">class MyComponent extends...</p>
+      </div>
+      <div class="card" style="background: rgba(239, 68, 68, 0.1);">
+        <p class="code-comment">// Old Reanimated v2</p>
+        <p style="font-family: monospace;">Animated.timing().start()</p>
+      </div>
+    </div>
+    <div class="col" style="flex: 1;">
+      <p class="text-green" style="font-size: 20px; font-weight: bold; margin-bottom: 16px;">You Should Use:</p>
+      <div class="card" style="background: rgba(16, 185, 129, 0.1); margin-bottom: 12px;">
+        <p class="code-comment">// Functional + hooks</p>
+        <p style="font-family: monospace;">function MyComponent() {}</p>
+      </div>
+      <div class="card" style="background: rgba(16, 185, 129, 0.1);">
+        <p class="code-comment">// Reanimated v4</p>
+        <p style="font-family: monospace;">x.value = withTiming(100)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 16: More Pitfalls -->
+<div class="slide">
+  <h1>More Critical Pitfalls</h1>
+  <div class="row">
+    <div class="col" style="flex: 1;">
+      <div class="card" style="border-left: 4px solid #ef4444;">
+        <p class="card-title text-red">Copy-Paste Syndrome</p>
+        <p class="card-desc">Code without understanding = tech debt</p>
+      </div>
+      <div class="card" style="border-left: 4px solid #f59e0b;">
+        <p class="card-title text-amber">Security Blindspots</p>
+        <p class="card-desc">AsyncStorage instead of SecureStore</p>
+      </div>
+    </div>
+    <div class="col" style="flex: 1;">
+      <div class="card" style="border-left: 4px solid #8b5cf6;">
+        <p class="card-title text-purple">Over-Engineering</p>
+        <p class="card-desc">AI loves unnecessary abstractions</p>
+      </div>
+      <div class="card" style="border-left: 4px solid #06b6d4;">
+        <p class="card-title text-cyan">Version Blindness</p>
+        <p class="card-desc">AI doesn't know your RN 0.81, Expo 54</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 17: Section - Prompting -->
+<div class="slide section">
+  <div class="section-bar bg-purple"></div>
+  <div class="section-content">
+    <p class="label text-purple">Part 4</p>
+    <h1 style="font-size: 48px;">Effective Prompting</h1>
+    <p class="subtitle">Getting better results from AI</p>
+  </div>
+</div>
+
+<!-- Slide 18: Good vs Bad Prompts -->
+<div class="slide">
+  <h1>Good Prompts vs. Bad Prompts</h1>
+  <div class="row">
+    <div class="col" style="flex: 1;">
+      <p class="text-red" style="font-size: 20px; font-weight: bold; margin-bottom: 16px;">BAD: Vague</p>
+      <div class="card" style="border: 1px solid rgba(239, 68, 68, 0.3); background: rgba(239, 68, 68, 0.1);">
+        <p style="font-style: italic;">"Fix this navigation crash"</p>
+      </div>
+      <div class="card" style="border: 1px solid rgba(239, 68, 68, 0.3); background: rgba(239, 68, 68, 0.1);">
+        <p style="font-style: italic;">"Make animation smoother"</p>
+      </div>
+      <p class="text-gray" style="margin-top: 12px;">Result: Generic, often wrong answers</p>
+    </div>
+    <div class="col" style="flex: 1;">
+      <p class="text-green" style="font-size: 20px; font-weight: bold; margin-bottom: 16px;">GOOD: Specific</p>
+      <div class="card" style="border: 1px solid rgba(16, 185, 129, 0.3); background: rgba(16, 185, 129, 0.1);">
+        <p style="font-style: italic; font-size: 15px;">"Using expo-router 6.0, crash on Android with [error]. Code: [snippet]"</p>
+      </div>
+      <div class="card" style="border: 1px solid rgba(16, 185, 129, 0.3); background: rgba(16, 185, 129, 0.1);">
+        <p style="font-style: italic; font-size: 15px;">"Reanimated 4.1, spring scale on press. Target: 60fps Android"</p>
+      </div>
+      <p class="text-gray" style="margin-top: 12px;">Result: Targeted, working solutions</p>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 19: Prompting Strategies -->
+<div class="slide">
+  <h1>Key Prompting Strategies</h1>
+  <div class="row">
+    <div class="col" style="flex: 1;">
+      <div class="card" style="border-left: 4px solid #8b5cf6;">
+        <p class="card-title text-purple">1. Specify Versions</p>
+        <p class="text-gray">"Using RN 0.81, Expo 54..."</p>
+      </div>
+      <div class="card" style="border-left: 4px solid #8b5cf6;">
+        <p class="card-title text-purple">2. Provide Context</p>
+        <p class="text-gray">Errors, code, constraints</p>
+      </div>
+      <div class="card" style="border-left: 4px solid #8b5cf6;">
+        <p class="card-title text-purple">3. Ask for Explanations</p>
+        <p class="text-gray">"Why does this work?"</p>
+      </div>
+    </div>
+    <div class="col" style="flex: 1;">
+      <div class="card" style="border-left: 4px solid #8b5cf6;">
+        <p class="card-title text-purple">4. Iterate</p>
+        <p class="text-gray">Follow-ups, request changes</p>
+      </div>
+      <div class="card" style="border-left: 4px solid #8b5cf6;">
+        <p class="card-title text-purple">5. Verify Output</p>
+        <p class="text-gray">Docs, TypeScript, test</p>
+      </div>
+      <div class="card" style="background: rgba(139, 92, 246, 0.2); text-align: center;">
+        <p style="font-size: 18px;">AI = helpful colleague, not oracle</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 20: Section - Hands-on -->
+<div class="slide section">
+  <div class="section-bar bg-amber"></div>
+  <div class="section-content">
+    <p class="label text-amber">Part 5</p>
+    <h1 style="font-size: 48px;">Hands-on Exercises</h1>
+    <p class="subtitle">60 minutes of practical work</p>
+  </div>
+</div>
+
+<!-- Slide 21: Exercise 1 -->
+<div class="slide">
+  <p class="label text-amber">Exercise 1 | 15 min</p>
+  <h2>Debug a Real Crash</h2>
+  <div class="row">
+    <div class="col" style="flex: 0.45;">
+      <p style="font-size: 18px; margin-bottom: 20px;">Material Top Tabs crashes on Android. Use AI to diagnose and fix.</p>
+      <div class="card">
+        <p class="text-amber" style="font-weight: bold; margin-bottom: 8px;">GOALS:</p>
+        <ul style="font-size: 16px;">
+          <li>Provide context</li>
+          <li>Ask follow-ups</li>
+          <li>Verify against docs</li>
+        </ul>
+      </div>
+    </div>
+    <div class="code-block" style="flex: 0.55;">
+      <p class="code-comment">// Crashes on Android!</p>
+      <p>&lt;Tab.Navigator&gt;</p>
+      <p style="padding-left: 20px;">&lt;Tab.Screen name="Feed" /&gt;</p>
+      <p style="padding-left: 20px;">&lt;Tab.Screen name="Profile" /&gt;</p>
+      <p>&lt;/Tab.Navigator&gt;</p>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 22: Exercise 2 -->
+<div class="slide">
+  <p class="label text-amber">Exercise 2 | 20 min</p>
+  <h2>Type-Safe Component</h2>
+  <div class="row">
+    <div class="col" style="flex: 0.45;">
+      <p style="font-size: 18px; margin-bottom: 20px;">Create mutually exclusive props with TypeScript.</p>
+      <div class="card">
+        <p class="text-green" style="font-weight: bold; margin-bottom: 8px;">REQUIREMENTS:</p>
+        <ul style="font-size: 16px;">
+          <li>Either data + renderItem</li>
+          <li>OR children</li>
+          <li>Never both</li>
+        </ul>
+      </div>
+    </div>
+    <div class="code-block" style="flex: 0.55;">
+      <p class="text-green">// Should work:</p>
+      <p>&lt;List data={items} renderItem={}/&gt;</p>
+      <p>&lt;List&gt;{children}&lt;/List&gt;</p>
+      <p style="margin-top: 20px;" class="text-red">// Should error:</p>
+      <p>&lt;List data={items}&gt;</p>
+      <p style="padding-left: 20px;">{children}</p>
+      <p>&lt;/List&gt;</p>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 23: Exercise 3 -->
+<div class="slide">
+  <p class="label text-amber">Exercise 3 | 15 min</p>
+  <h2>Reanimated Animation</h2>
+  <div class="row">
+    <div class="col" style="flex: 0.45;">
+      <p style="font-size: 18px; margin-bottom: 20px;">Create a pull-to-refresh indicator with Reanimated 4.</p>
+      <div class="card">
+        <p class="text-green" style="font-weight: bold; margin-bottom: 8px;">REQUIREMENTS:</p>
+        <ul style="font-size: 16px;">
+          <li>Scale on pull</li>
+          <li>Rotate while refreshing</li>
+          <li>Use v4 syntax!</li>
+        </ul>
+      </div>
+    </div>
+    <div class="code-block" style="flex: 0.55;">
+      <p class="code-comment">// Starter code</p>
+      <p>const rotation = useSharedValue(0);</p>
+      <p>const scale = useSharedValue(0);</p>
+      <p style="margin-top: 20px;" class="code-comment">// Ask AI to implement:</p>
+      <p class="code-comment">// - Scale from pullProgress</p>
+      <p class="code-comment">// - Rotate when refreshing</p>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 24: Discussion -->
+<div class="slide">
+  <h1 style="font-size: 40px;">Discussion Questions</h1>
+  <div class="col" style="gap: 24px; max-width: 800px;">
+    <div class="card" style="border-left: 4px solid #3b82f6; padding: 24px;">
+      <p style="font-size: 22px;">What surprised you about using AI for coding?</p>
+    </div>
+    <div class="card" style="border-left: 4px solid #10b981; padding: 24px;">
+      <p style="font-size: 22px;">Where did AI help most vs. mislead you?</p>
+    </div>
+    <div class="card" style="border-left: 4px solid #8b5cf6; padding: 24px;">
+      <p style="font-size: 22px;">How would you integrate this into your workflow?</p>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 25: Key Takeaways -->
+<div class="slide">
+  <h1 style="font-size: 40px;">Key Takeaways</h1>
+  <div class="row">
+    <div class="col" style="flex: 1;">
+      <div class="takeaway" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(59, 130, 246, 0.1)); border-color: #3b82f6;">
+        <p style="font-size: 18px; font-weight: bold;">AI = assistant, not replacement</p>
+      </div>
+      <div class="takeaway" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.1)); border-color: #10b981;">
+        <p style="font-size: 18px; font-weight: bold;">Context is everything</p>
+      </div>
+      <div class="takeaway" style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(139, 92, 246, 0.1)); border-color: #8b5cf6;">
+        <p style="font-size: 18px; font-weight: bold;">Always verify output</p>
+      </div>
+    </div>
+    <div class="col" style="flex: 1;">
+      <div class="takeaway" style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(245, 158, 11, 0.1)); border-color: #f59e0b;">
+        <p style="font-size: 18px; font-weight: bold;">Best: types, debug, boilerplate</p>
+      </div>
+      <div class="takeaway" style="background: linear-gradient(135deg, rgba(236, 72, 153, 0.2), rgba(236, 72, 153, 0.1)); border-color: #ec4899;">
+        <p style="font-size: 18px; font-weight: bold;">Watch: hallucinations, old code</p>
+      </div>
+      <div class="takeaway" style="background: linear-gradient(135deg, rgba(6, 182, 212, 0.2), rgba(6, 182, 212, 0.1)); border-color: #06b6d4;">
+        <p style="font-size: 18px; font-weight: bold;">Iterate, don't accept first try</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 26: Resources -->
+<div class="slide">
+  <h1 style="font-size: 40px;">Resources</h1>
+  <div class="row">
+    <div class="col" style="flex: 1;">
+      <p class="text-blue" style="font-weight: bold; letter-spacing: 1px; margin-bottom: 12px;">AI TOOLS</p>
+      <div class="card">
+        <ul style="font-size: 18px;">
+          <li>claude.ai</li>
+          <li>chat.openai.com</li>
+          <li>cursor.sh</li>
+          <li>ollama.ai</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col" style="flex: 1;">
+      <p class="text-green" style="font-weight: bold; letter-spacing: 1px; margin-bottom: 12px;">DOCUMENTATION</p>
+      <div class="card">
+        <ul style="font-size: 18px;">
+          <li>docs.expo.dev</li>
+          <li>reactnative.dev</li>
+          <li>tanstack.com/query</li>
+          <li>docs.swmansion.com</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 27: Thank You -->
+<div class="slide center" style="background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #0f172a 100%);">
+  <h1 style="font-size: 64px;">Thank You!</h1>
+  <p class="subtitle" style="margin-top: 16px;">Questions?</p>
+  <div style="width: 200px; height: 2px; background: linear-gradient(90deg, transparent, #3b82f6, transparent); margin: 48px 0;"></div>
+  <div class="card" style="padding: 28px 48px; text-align: center;">
+    <p style="font-size: 26px; font-weight: bold;">AI + Human Expertise = Better Code</p>
+  </div>
+</div>
+
+<!-- Navigation -->
+<div class="nav">
+  <button id="prevBtn" onclick="changeSlide(-1)">← Previous</button>
+  <button id="nextBtn" onclick="changeSlide(1)">Next →</button>
+</div>
+
+<div class="slide-counter">
+  <span id="currentSlide">1</span> / <span id="totalSlides">27</span>
+</div>
+
+<script>
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.slide');
+  const totalSlides = slides.length;
+  
+  document.getElementById('totalSlides').textContent = totalSlides;
+  
+  function showSlide(n) {
+    slides[currentSlide].classList.remove('active');
+    currentSlide = (n + totalSlides) % totalSlides;
+    slides[currentSlide].classList.add('active');
+    document.getElementById('currentSlide').textContent = currentSlide + 1;
+    
+    document.getElementById('prevBtn').disabled = currentSlide === 0;
+    document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
+  }
+  
+  function changeSlide(direction) {
+    showSlide(currentSlide + direction);
+  }
+  
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ') {
+      e.preventDefault();
+      if (currentSlide < totalSlides - 1) changeSlide(1);
+    } else if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      if (currentSlide > 0) changeSlide(-1);
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      showSlide(0);
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      showSlide(totalSlides - 1);
+    }
+  });
+  
+  // Touch navigation for mobile
+  let touchStartX = 0;
+  document.addEventListener('touchstart', (e) => {
+    touchStartX = e.touches[0].clientX;
+  });
+  
+  document.addEventListener('touchend', (e) => {
+    const touchEndX = e.changedTouches[0].clientX;
+    const diff = touchStartX - touchEndX;
+    
+    if (Math.abs(diff) > 50) {
+      if (diff > 0 && currentSlide < totalSlides - 1) {
+        changeSlide(1);
+      } else if (diff < 0 && currentSlide > 0) {
+        changeSlide(-1);
+      }
+    }
+  });
+</script>
+
+</body>
+</html>
