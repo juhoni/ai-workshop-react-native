@@ -1,9 +1,9 @@
 import { Link } from "expo-router";
-import { View, Text, StyleSheet, Pressable } from "react-native";
+import { View, Text, StyleSheet, Pressable, ScrollView } from "react-native";
 
 export default function HomeScreen() {
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container} contentContainerStyle={styles.content}>
       <Text style={styles.title}>Workshop Exercises</Text>
       <Text style={styles.subtitle}>
         React Native 0.81 • Expo 54 • Reanimated 4.1
@@ -49,8 +49,16 @@ export default function HomeScreen() {
             <Text style={styles.cardDesc}>When to optimize vs premature optimization</Text>
           </Pressable>
         </Link>
+
+        <Link href="/exercises/exercise6" asChild>
+          <Pressable style={styles.card}>
+            <Text style={styles.cardNumber}>06</Text>
+            <Text style={styles.cardTitle}>Jest Testing</Text>
+            <Text style={styles.cardDesc}>Find edge cases in financial calculations</Text>
+          </Pressable>
+        </Link>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
@@ -58,7 +66,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#0f172a",
+  },
+  content: {
     padding: 24,
+    paddingBottom: 60,
   },
   title: {
     fontSize: 32,

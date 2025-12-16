@@ -73,6 +73,16 @@ Review a product list for performance:
 - Correct dependency arrays
 - Question AI recommendations critically
 
+### Exercise 6: Jest Testing & Edge Cases
+**File:** `app/exercises/exercise6.tsx`
+
+Test a complex financial portfolio calculator:
+- Set up Jest for Expo/React Native
+- Write tests that expose dangerous edge cases
+- Find division by zero vulnerabilities
+- Fix floating point precision issues with money
+- Handle empty portfolios and edge conditions
+
 ## Workshop Tips
 
 ### Good Prompts Include:
@@ -102,7 +112,8 @@ app/
     ├── exercise2.tsx    # Type-safe component
     ├── exercise3.tsx    # Reanimated animation
     ├── exercise4.tsx    # TanStack Query data fetching
-    └── exercise5.tsx    # Performance optimization
+    ├── exercise5.tsx    # Performance optimization
+    └── exercise6.tsx    # Jest testing & edge cases
 ```
 
 ## Resources

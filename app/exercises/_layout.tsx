@@ -29,6 +29,10 @@ export default function ExercisesLayout() {
         name="exercise5"
         options={{ title: "Exercise 5: Performance" }}
       />
+      <Stack.Screen
+        name="exercise6"
+        options={{ title: "Exercise 6: Jest Testing" }}
+      />
     </Stack>
   );
 }
