@@ -7,6 +7,7 @@ export default function ExercisesLayout() {
         headerStyle: { backgroundColor: "#0f172a" },
         headerTintColor: "#f1f5f9",
         contentStyle: { backgroundColor: "#0f172a" },
+        headerBackTitle: "Home",
       }}
     >
       <Stack.Screen
@@ -32,6 +33,14 @@ export default function ExercisesLayout() {
       <Stack.Screen
         name="exercise6"
         options={{ title: "Exercise 6: Jest Testing" }}
+      />
+      <Stack.Screen
+        name="exercise7"
+        options={{ title: "Exercise 7: Design System" }}
+      />
+      <Stack.Screen
+        name="exercise8"
+        options={{ title: "Exercise 8: Component Variants" }}
       />
     </Stack>
   );

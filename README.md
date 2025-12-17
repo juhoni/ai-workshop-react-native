@@ -83,6 +83,26 @@ Test a complex financial portfolio calculator:
 - Fix floating point precision issues with money
 - Handle empty portfolios and edge conditions
 
+### Exercise 7: Design System & Theme Generation
+**File:** `app/exercises/exercise7.tsx`
+
+Generate a complete design system from brand colors using AI:
+- Generate full color palettes (50-900 shades) from a single brand color
+- Create semantic design tokens (primary, secondary, success, error, warning)
+- Validate WCAG contrast ratios for accessibility
+- Build responsive spacing and typography scales
+- Learn how AI can accelerate design-to-code workflows
+
+### Exercise 8: Component Variants & Accessibility
+**File:** `app/exercises/exercise8.tsx`
+
+Design flexible, accessible components with AI assistance:
+- Create components with multiple variants and sizes
+- Implement full accessibility (ARIA, keyboard navigation, screen readers)
+- Describe component behavior in plain language → Get production code
+- Build Button, Input, and Card components with comprehensive variants
+- Auto-generate component documentation for design systems
+
 ## Workshop Tips
 
 ### Good Prompts Include:
@@ -113,7 +133,9 @@ app/
     ├── exercise3.tsx    # Reanimated animation
     ├── exercise4.tsx    # TanStack Query data fetching
     ├── exercise5.tsx    # Performance optimization
-    └── exercise6.tsx    # Jest testing & edge cases
+    ├── exercise6.tsx    # Jest testing & edge cases
+    ├── exercise7.tsx    # Design system & theme generation
+    └── exercise8.tsx    # Component variants & accessibility
 ```
 
 ## Resources

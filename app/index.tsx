@@ -57,6 +57,22 @@ export default function HomeScreen() {
             <Text style={styles.cardDesc}>Find edge cases in financial calculations</Text>
           </Pressable>
         </Link>
+
+        <Link href="/exercises/exercise7" asChild>
+          <Pressable style={styles.cardDesign}>
+            <Text style={styles.cardNumberDesign}>07</Text>
+            <Text style={styles.cardTitle}>Design System</Text>
+            <Text style={styles.cardDesc}>Generate themes & validate accessibility</Text>
+          </Pressable>
+        </Link>
+
+        <Link href="/exercises/exercise8" asChild>
+          <Pressable style={styles.cardDesign}>
+            <Text style={styles.cardNumberDesign}>08</Text>
+            <Text style={styles.cardTitle}>Component Variants</Text>
+            <Text style={styles.cardDesc}>Accessible components with AI assistance</Text>
+          </Pressable>
+        </Link>
       </View>
     </ScrollView>
   );
@@ -93,9 +109,22 @@ const styles = StyleSheet.create({
     borderLeftWidth: 4,
     borderLeftColor: "#3b82f6",
   },
+  cardDesign: {
+    backgroundColor: "#1e293b",
+    borderRadius: 12,
+    padding: 20,
+    borderLeftWidth: 4,
+    borderLeftColor: "#8b5cf6",
+  },
   cardNumber: {
     fontSize: 12,
     color: "#3b82f6",
+    fontWeight: "bold",
+    letterSpacing: 2,
+  },
+  cardNumberDesign: {
+    fontSize: 12,
+    color: "#8b5cf6",
     fontWeight: "bold",
     letterSpacing: 2,
   },

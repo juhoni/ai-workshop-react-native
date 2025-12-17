@@ -326,7 +326,7 @@
           </div>
           <div class="card" style="border-left: 4px solid #10b981">
             <p style="font-size: 22px; font-weight: bold">
-              5. Hands-on (6 Exercises)
+              5. Hands-on (8 Exercises)
             </p>
           </div>
           <div class="card" style="border-left: 4px solid #10b981">
@@ -940,7 +940,7 @@
       <div class="section-content">
         <p class="label text-amber">Part 5</p>
         <h1 style="font-size: 48px">Hands-on Exercises</h1>
-        <p class="subtitle">6 exercises · Choose 3-4 based on time</p>
+        <p class="subtitle">8 exercises · Choose 4-5 based on time</p>
       </div>
     </div>
 
@@ -1142,7 +1142,76 @@
       </div>
     </div>
 
-    <!-- Slide 27: Discussion -->
+    <!-- Slide 27: Exercise 7 -->
+    <div class="slide">
+      <p class="label text-amber">Exercise 7 | 20 min</p>
+      <h2>Design System & Theme Generation</h2>
+      <div class="row">
+        <div class="col" style="flex: 0.45">
+          <p style="font-size: 18px; margin-bottom: 20px">
+            Generate a complete design system from brand colors using AI.
+          </p>
+          <div class="card">
+            <p class="text-green" style="font-weight: bold; margin-bottom: 8px">
+              GOALS:
+            </p>
+            <ul style="font-size: 16px">
+              <li>Generate color scales (50-900)</li>
+              <li>Create semantic tokens</li>
+              <li>Validate WCAG contrast</li>
+              <li>Build spacing & type scales</li>
+            </ul>
+          </div>
+        </div>
+        <div class="code-block" style="flex: 0.55">
+          <p class="code-comment">// Input: Brand color #6366f1</p>
+          <p class="code-comment">// Output: Full design system</p>
+          <p style="margin-top: 12px">colors: {</p>
+          <p style="padding-left: 20px">primary: { 50: "...", ... 900 },</p>
+          <p style="padding-left: 20px">success: { 50: "...", ... 900 },</p>
+          <p>},</p>
+          <p style="margin-top: 12px" class="code-comment">
+            // + accessibility validation
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 28: Exercise 8 -->
+    <div class="slide">
+      <p class="label text-amber">Exercise 8 | 20 min</p>
+      <h2>Component Variants & Accessibility</h2>
+      <div class="row">
+        <div class="col" style="flex: 0.45">
+          <p style="font-size: 18px; margin-bottom: 20px">
+            Design flexible, accessible components with multiple variants.
+          </p>
+          <div class="card">
+            <p class="text-green" style="font-weight: bold; margin-bottom: 8px">
+              GOALS:
+            </p>
+            <ul style="font-size: 16px">
+              <li>Multiple variants & sizes</li>
+              <li>Full accessibility support</li>
+              <li>Describe → Get production code</li>
+              <li>Auto-generate docs</li>
+            </ul>
+          </div>
+        </div>
+        <div class="code-block" style="flex: 0.55">
+          <p class="code-comment">// Design → Code workflow</p>
+          <p>&lt;Button variant="primary" size="lg"&gt;</p>
+          <p>&lt;Button variant="outline" loading /&gt;</p>
+          <p>&lt;Button variant="ghost" disabled /&gt;</p>
+          <p style="margin-top: 12px" class="code-comment">
+            // + Input, Card components
+          </p>
+          <p class="code-comment">// + Proper ARIA labels</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 29: Discussion -->
     <div class="slide">
       <h1 style="font-size: 40px">Discussion Questions</h1>
       <div class="col" style="gap: 24px; max-width: 800px">
@@ -1341,7 +1410,7 @@
     </div>
 
     <div class="slide-counter">
-  <span id="currentSlide">1</span> / <span id="totalSlides">32</span>
+  <span id="currentSlide">1</span> / <span id="totalSlides">34</span>
 
     <script>
       let currentSlide = 0;
