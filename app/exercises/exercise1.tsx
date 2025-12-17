@@ -19,8 +19,9 @@
  * - react-native-gesture-handler: 2.29.1
  */
 
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Platform } from "react-native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import { NavigationContainer } from "@react-navigation/native";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -71,17 +72,19 @@ export default function Exercise1Screen() {
       </Text>
 
       <View style={styles.tabContainer}>
-        <Tab.Navigator
-          screenOptions={{
-            tabBarStyle: { backgroundColor: "#1e293b" },
-            tabBarLabelStyle: { color: "#f1f5f9", fontWeight: "600" },
-            tabBarIndicatorStyle: { backgroundColor: "#3b82f6" },
-          }}
-        >
-          <Tab.Screen name="Feed" component={FeedScreen} />
-          <Tab.Screen name="Profile" component={ProfileScreen} />
-          <Tab.Screen name="Notifications" component={NotificationsScreen} />
-        </Tab.Navigator>
+        <NavigationContainer>
+          <Tab.Navigator
+            screenOptions={{
+              tabBarStyle: { backgroundColor: "#1e293b" },
+              tabBarLabelStyle: { color: "#f1f5f9", fontWeight: "600" },
+              tabBarIndicatorStyle: { backgroundColor: "#3b82f6" },
+            }}
+          >
+            <Tab.Screen name="Feed" component={FeedScreen} />
+            <Tab.Screen name="Profile" component={ProfileScreen} />
+            <Tab.Screen name="Notifications" component={NotificationsScreen} />
+          </Tab.Navigator>
+        </NavigationContainer>
       </View>
     </View>
   );

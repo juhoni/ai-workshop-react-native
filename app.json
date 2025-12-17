@@ -17,8 +17,17 @@
       },
       "package": "com.workshop.aiexercises"
     },
+    "web": {
+      "bundler": "metro",
+      "output": "static"
+    },
     "plugins": [
-      "expo-router"
+      [
+        "expo-router",
+        {
+          "origin": "https://localhost:8081/"
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true
